@@ -17,8 +17,8 @@ namespace SistemaGestionCitas.Application.DTOs.Requests
         public int TurnoId { get; set; }
         public int FranjaId { get; set; }
 
-        [IDValido(ErrorMessage = "El ID del Lugar no es válido.")]
-        public short LugarId { get; set; }
+        [IDValido(ErrorMessage = "El ID del doctor no es válido.")]
+        public short DoctorId { get; set; }
 
         [IDValido(ErrorMessage = "El ID del Servicio no es válido.")]
         public short ServicioId { get; set; }

@@ -8,7 +8,7 @@ namespace SistemaGestionCitas.Application.DTOs.Responses
 {
     public class DoctorResponseDto
     {
-        public short LugarId { get; set; }
+        public short DoctorId { get; set; }
         public string Nombre { get; set; } = null!;
 
     }

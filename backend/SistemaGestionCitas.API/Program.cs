@@ -1,11 +1,6 @@
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using SistemaGestionCitas.Application.Services;
 using SistemaGestionCitas.Application.UseCases;
 using SistemaGestionCitas.Application.Validators;
@@ -73,24 +68,6 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<UsuarioService>();
 
-//builder.Services.AddAuthentication("Bearer")
-//    .AddJwtBearer("Bearer", options =>
-//    {
-//        options.MapInboundClaims = false; // Mantener los nombres originales de los claims
-//        var config = builder.Configuration;
-        
-//        var key = Encoding.UTF8.GetBytes(config["Jwt:Secret"]!);
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = true,
-//            ValidateAudience = true,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//            ValidAudience = builder.Configuration["Jwt:Audience"],
-//            IssuerSigningKey = new SymmetricSecurityKey(key)
-//        };
-//    });
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>

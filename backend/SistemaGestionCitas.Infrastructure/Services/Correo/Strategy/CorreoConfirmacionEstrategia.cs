@@ -11,7 +11,7 @@ namespace SistemaGestionCitas.Infrastructure.Services.Correo.Strategy
     {
         public async Task EnviarAsync(Cita cita, Usuario usuario, FranjaHorario franjaSeleccionada)
         {
-            string template = await File.ReadAllTextAsync("C:\\SistemaDeGestionDeCitas\\SistemaGestionCitas.Infrastructure\\Services\\Correo\\Plantillas\\confirmacion.html");
+            string template = await File.ReadAllTextAsync("C:\\SistemaCitas\\backend\\SistemaGestionCitas.Infrastructure\\Services\\Correo\\Plantillas\\confirmacion.html");
             string body = template
                 .Replace("{{UserName}}", usuario.Nombre.Value)
                 .Replace("{{IdCita}}", cita.IdCita.ToString())

@@ -131,7 +131,7 @@ namespace SistemaGestionCitas.Infrastructure.Persistence.BdContext
             modelBuilder.Entity<Cita>().Property(c => c.IdCita).HasColumnName("id_cita");
             modelBuilder.Entity<Cita>().Property(c => c.IdUsuario).HasColumnName("id_usuario");
             modelBuilder.Entity<Cita>().Property(c => c.TurnoId).HasColumnName("turno_id");
-            modelBuilder.Entity<Cita>().Property(c => c.DoctorId).HasColumnName("lugar_id");
+            modelBuilder.Entity<Cita>().Property(c => c.DoctorId).HasColumnName("doctor_id");
             modelBuilder.Entity<Cita>().Property(c => c.ServicioId).HasColumnName("servicio_id");
             modelBuilder.Entity<Cita>().Property(c => c.Estado).HasColumnName("estado");
             modelBuilder.Entity<Cita>().Property(c => c.RowVersion).HasColumnName("row_version");
