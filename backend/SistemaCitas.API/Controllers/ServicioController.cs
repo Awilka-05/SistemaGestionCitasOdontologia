@@ -1,0 +1,94 @@
+﻿using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using SistemaCitas.Application.DTOs.Requests;
+using SistemaCitas.Application.DTOs.Responses;
+using SistemaCitas.Application.Services;
+using SistemaCitas.Domain.Entities;
+using SistemaCitas.Domain.Interfaces.Services;
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace SistemaCitas.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ServicioController : ControllerBase
+    {
+        private readonly IServicioService _servicioService;
+        private readonly ILogger<ServicioController> _logger;
+
+        public ServicioController(IServicioService servicioService, ILogger<ServicioController> logger)
+        {
+            _servicioService = servicioService;
+            _logger = logger;
+        }
+
+        // GET: api/<ServicioController>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ServicioResponseDto>>> GetAll()
+        {
+            var result = await _servicioService.GetAllAsync();
+
+            if (result.IsFailure)
+            {
+                ModelState.AddModelError("Error", result.Error);
+                return BadRequest(ModelState);
+            }
+
+            var response = result.Value.Adapt<IEnumerable<ServicioResponseDto>>();
+            return Ok(response);
+        }
+
+        // GET api/<ServicioController>/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServicioResponseDto>> GetById(short id)
+        {
+            var result = await _servicioService.GetByIdAsync(id);
+
+            if (result.IsFailure)
+            {
+                ModelState.AddModelError("Error", result.Error);
+                return NotFound(ModelState);
+            }
+
+            var response = result.Value.Adapt<ServicioResponseDto>();
+            return Ok(response);
+        }
+
+        // POST api/<ServicioController>
+        [HttpPost]
+        public async Task<ActionResult<ServicioResponseDto>> Add([FromBody] ServicioDto dto)
+        {
+            var servicio = dto.Adapt<Servicio>();
+
+            var result = await _servicioService.AddAsync(servicio);
+
+            if (result.IsFailure)
+            {
+                ModelState.AddModelError("Error", result.Error);
+                return BadRequest(ModelState);
+            }
+            var response = result.Value.Adapt<ServicioResponseDto>();
+
+            return Ok(response);
+        }
+        // PUT api/<ServicioController>/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ServicioResponseDto>> Update(short id, [FromBody] ServicioDto dto)
+        {
+            var servicio = dto.Adapt<Servicio>();
+            servicio.ServicioId = id;
+
+            var result = await _servicioService.UpdateAsync(servicio);
+
+            if (result.IsFailure)
+            {
+                ModelState.AddModelError("Error", result.Error);
+                return BadRequest(ModelState);
+            }
+
+            var response = result.Value.Adapt<DoctorResponseDto>();
+            return Ok(response);
+        }
+
+    }
+}
